@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: persona-decoder-backend
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: BOT_TOKEN
+        sync: false
+      - key: ADMIN_KEY
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: persona-decoder-db
+          property: connectionString
+
+databases:
+  - name: persona-decoder-db
+    databaseName: persona_decoder
+    user: persona_user
