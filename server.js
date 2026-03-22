@@ -5,7 +5,12 @@ const crypto = require('crypto');
 
 const app = express();
 app.use(express.json({ limit: '10mb' }));
-app.use(cors({ origin: '*' }));
+app.use(cors({ 
+  origin: '*',
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'x-telegram-init-data', 'x-admin-key']
+}));
+app.options('*', cors());
 
 // ── Database ──────────────────────────────────────────────
 const pool = new Pool({
